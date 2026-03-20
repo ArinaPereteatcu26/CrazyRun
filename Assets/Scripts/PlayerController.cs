@@ -1,16 +1,42 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    Vector2 movement;
+    Rigidbody rb;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float xClamp = 3f;
+    [SerializeField] float zClamp = 2f;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        HandleMovement();
+    }
+
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        movement = context.ReadValue<Vector2>();
+    }
+
+    void HandleMovement()
+    {
+        Vector3 currentPosition = rb.position;
+        Vector3 moveDirection = new Vector3(movement.x, 0f, movement.y);
+        Vector3 newPosition = currentPosition + moveDirection * (moveSpeed * Time.fixedDeltaTime * 5f);
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -xClamp, xClamp);
+        newPosition.z = Mathf.Clamp(newPosition.z, -zClamp, zClamp);
+
+        rb.MovePosition(newPosition);
     }
 }
+
