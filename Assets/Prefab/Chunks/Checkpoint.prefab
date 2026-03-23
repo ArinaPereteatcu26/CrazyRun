@@ -795,6 +795,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 182267791238274459, guid: c9342a3d10a92594fbf936b688eb124a, type: 3}
+      propertyPath: coinSpawnChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182267791238274459, guid: c9342a3d10a92594fbf936b688eb124a, type: 3}
+      propertyPath: appleSpawnChance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2510110322814073759, guid: c9342a3d10a92594fbf936b688eb124a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
