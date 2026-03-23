@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7145640657281117045}
   - component: {fileID: 8754103365115561169}
-  - component: {fileID: -2449704505069526617}
+  - component: {fileID: -5893587804048242034}
   m_Layer: 0
   m_Name: Appple Pickup
   m_TagString: Untagged
@@ -57,7 +57,7 @@ CapsuleCollider:
   m_Height: 1.0081286
   m_Direction: 1
   m_Center: {x: 0, y: 1.012975, z: 0}
---- !u!114 &-2449704505069526617
+--- !u!114 &-5893587804048242034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Apple
   rotationSpeed: 100
+  adjustChangeMoveSpeedAmount: 3
 --- !u!1 &769958478361021621
 GameObject:
   m_ObjectHideFlags: 0

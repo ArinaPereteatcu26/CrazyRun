@@ -1,26 +1,24 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControler : MonoBehaviour
 {
-    Vector2 movement;
-    Rigidbody rb;
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 20f;
     [SerializeField] float xClamp = 3f;
-    [SerializeField] float zClamp = 2f;
+    [SerializeField] float zClamp = 3f;
+
+    Vector2 movement;
+    Rigidbody rigidBody;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         HandleMovement();
     }
-
 
     public void Move(InputAction.CallbackContext context)
     {
@@ -29,14 +27,13 @@ public class PlayerControler : MonoBehaviour
 
     void HandleMovement()
     {
-        Vector3 currentPosition = rb.position;
+        Vector3 currentPosition = rigidBody.position;
         Vector3 moveDirection = new Vector3(movement.x, 0f, movement.y);
-        Vector3 newPosition = currentPosition + moveDirection * (moveSpeed * Time.fixedDeltaTime * 5f);
+        Vector3 newPosition = currentPosition + moveDirection * (moveSpeed * Time.fixedDeltaTime);
 
         newPosition.x = Mathf.Clamp(newPosition.x, -xClamp, xClamp);
         newPosition.z = Mathf.Clamp(newPosition.z, -zClamp, zClamp);
 
-        rb.MovePosition(newPosition);
+        rigidBody.MovePosition(newPosition);
     }
 }
-

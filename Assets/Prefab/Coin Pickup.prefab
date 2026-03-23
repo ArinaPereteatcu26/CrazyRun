@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6380304803082932262}
   - component: {fileID: -6572077925928059294}
-  - component: {fileID: 5865730237073913369}
+  - component: {fileID: 1493807919699526105}
   m_Layer: 0
   m_Name: Coin Pickup
   m_TagString: Untagged
@@ -89,7 +89,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.74020386, z: 0}
---- !u!114 &5865730237073913369
+--- !u!114 &1493807919699526105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
   rotationSpeed: 100
+  scoreAmount: 100
 --- !u!1001 &1840867082244442784
 PrefabInstance:
   m_ObjectHideFlags: 0

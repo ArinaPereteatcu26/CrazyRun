@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Coin : Pickup
 {
-    [SerializeField] int scoreAmount = 100;
+   
     ScoreManager scoreManager;
 
+    [SerializeField] int scoreAmount = 100;
     public void Init(ScoreManager scoreManager)
     {
         this.scoreManager = scoreManager;

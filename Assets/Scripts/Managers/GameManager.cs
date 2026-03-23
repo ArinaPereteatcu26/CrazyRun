@@ -11,33 +11,34 @@ public class GameManager : MonoBehaviour
     float timeLeft;
     bool gameOver = false;
 
-    public bool GameOver{get { return gameOver; }}
+    public bool GameOver => gameOver;
 
-    private void Start()
+    void Start()
     {
         timeLeft = startTime;
     }
 
-    private void Update()
+    void Update()
     {
-       DecreaseTime();
+        DecreaseTime();
     }
 
-    
+    public void IncreaseTime(float amount)
+    {
+        timeLeft += amount;
+    }
 
-    private void DecreaseTime()
+    void DecreaseTime()
     {
         if (gameOver) return;
 
         timeLeft -= Time.deltaTime;
         timeText.text = timeLeft.ToString("F1");
 
-        if (timeLeft <= 0)
+        if (timeLeft <= 0f)
         {
             PlayerGameOver();
         }
-
-       
     }
 
     void PlayerGameOver()
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         playerController.enabled = false;
         gameOverText.SetActive(true);
-        Time.timeScale = 0.1f;
+        Time.timeScale = .1f;
     }
-
 }

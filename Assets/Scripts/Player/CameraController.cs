@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
-{
+{   
+    [SerializeField] ParticleSystem speedupParticleSystem;
     [SerializeField] float zoomDuration = 1f;
     [SerializeField] float minFOV = 20f;
     [SerializeField] float maxFOV = 120f;
     [SerializeField] float zoomSpeedModifier = 5f;
-    [SerializeField] ParticleSystem speedupParticleSystem;
+   
    
 
     CinemachineCamera cinemachineCamera;
@@ -42,7 +43,8 @@ public class CameraController : MonoBehaviour
             float t = elapsedTime / zoomDuration;
 
             elapsedTime += Time.deltaTime;
-            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(startFOV, targetFOV, elapsedTime / zoomDuration);
+
+            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(startFOV, targetFOV, t);
             yield return null;
         }
 

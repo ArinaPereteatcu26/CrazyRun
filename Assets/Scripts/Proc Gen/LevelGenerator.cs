@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class LevelGenerator : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] CameraController cameraController;
     [SerializeField] GameObject[] chunkPrefabs;
+    [SerializeField] GameObject checkpointChunkPrefab;
     [SerializeField] Transform chunkParent;
     [SerializeField] ScoreManager scoreManager;
 
@@ -14,9 +14,10 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("LevelSettings")]
     [SerializeField] int StartingChunksAmount = 12;
+    [SerializeField] int checkpointChunkInterval = 8;
     [Tooltip("Do no change chink lenght")]
     [SerializeField] float chunkLength = 10f;
-    [SerializeField] float moveSpeed = 8f;
+    [SerializeField] float moveSpeed = 15f;
     [SerializeField] float minMoveSpeed = 2f;
     [SerializeField] float maxMoveSpeed = 20f;
     [SerializeField] float minGravityZ = -22f;
@@ -26,6 +27,7 @@ public class LevelGenerator : MonoBehaviour
     
 
     List<GameObject> chunks = new List<GameObject> ();
+    int chunksSpawned = 0;
 
     void Start()
     {
@@ -40,10 +42,10 @@ public class LevelGenerator : MonoBehaviour
 
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
-        float newMoveSpeed = moveSpeed * speedAmount;
+        float newMoveSpeed = moveSpeed + speedAmount;
         newMoveSpeed = Mathf.Clamp(newMoveSpeed, minMoveSpeed, maxMoveSpeed);
 
-        if (newMoveSpeed != minMoveSpeed)
+        if (newMoveSpeed != moveSpeed)
         {
             moveSpeed = newMoveSpeed;
 
@@ -67,16 +69,31 @@ public class LevelGenerator : MonoBehaviour
     private void SpawnChunk()
     {
         float spawnPositionZ = CaclulcateSpawnPositionZ();
-
         Vector3 chunkSpawnPos = new Vector3(transform.position.x, transform.position.y, spawnPositionZ);
-
-        GameObject chunkToSpawn = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        GameObject chunkToSpawn = ChooseChunkToSpawn();
         GameObject newChunkGO = Instantiate(chunkToSpawn, chunkSpawnPos, Quaternion.identity, chunkParent);
-
         chunks.Add(newChunkGO);
-
         Chunk newChunk = newChunkGO.GetComponent<Chunk>();
         newChunk.Init(this, scoreManager);
+
+        chunksSpawned++;
+    }
+
+    private GameObject ChooseChunkToSpawn()
+    {
+        GameObject chunkToSpawn;
+
+        if (chunksSpawned % checkpointChunkInterval == 0 && chunksSpawned != 0)
+        {
+            chunkToSpawn = checkpointChunkPrefab;
+        }
+        else
+        {
+            chunkToSpawn = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+
+        }
+
+        return chunkToSpawn;
     }
 
     float CaclulcateSpawnPositionZ()
@@ -95,7 +112,7 @@ public class LevelGenerator : MonoBehaviour
         return spawnPositionZ;
     }
 
-    private void MoveChunks()
+    void MoveChunks()
     {
         for(int i = 0; i < chunks.Count; i++)
         {

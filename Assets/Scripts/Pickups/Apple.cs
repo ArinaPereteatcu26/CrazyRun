@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Apple : Pickup
 {
-    [SerializeField] float adjustChangeMoveSpeedAmount = 3f;
+    [SerializeField] float adjustChangeMoveSpeedAmount = 5f;
 
     LevelGenerator levelGenerator;
 
