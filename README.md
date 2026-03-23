@@ -1,6 +1,7 @@
 # CrazyRun Game
 
 This is an endless runner game developed in Unity, where the player has  to avoid obstacles and collect bonuses to survive as much as possible.
+Available: https://play.unity.com/en/games/716280db-deb5-4773-9355-d82d178f46ec/crazy-run
 
 ## Features
 - **Procedural chunk generation** for an infinite level
@@ -96,7 +97,7 @@ The player uses **Animator transitions** to react to collisions, including a stu
 - Survive as Long as Possible
 
 OR
-Access the game through the link: 
+Run the exe file from the build folder
 
 
 ## Author
